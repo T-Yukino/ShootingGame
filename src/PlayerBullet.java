@@ -7,4 +7,9 @@ public class PlayerBullet extends Character{
 		
 	}
 	
+	public void draw(MyFrame f) {
+		f.setColor(0, 0, 128);
+		f.fillRect(x+10,y,10,30);
+	}
+	
 }
