@@ -16,11 +16,21 @@ public class GameFrame extends MyFrame{
 			GameWorld.player.draw(this);
 			GameWorld.player.move();
 			movePlayerBullets();
+			moveEnemies();
+			checkPlayerAndEnemies();
+			checkPlayerBulletsAndEnemies();
 			
 			for(int i=0 ; i<GameWorld.enemies.size(); i++) {
 				Enemy e=GameWorld.enemies.get(i);
-				e.draw(this);
-				e.move();
+				if(e.x==GameWorld.player.x && e.y==GameWorld.player.y) {
+					
+					if(Math.abs(e.x-GameWorld.player.x)<=30 && 
+							Math.abs(e.y-GameWorld.player.y)<=30) {
+						System.out.println("やられた！");
+						GameWorld.player.y=-1000;
+					}
+					
+				}
 			}
 			
 			sleep(0.03);
@@ -53,7 +63,58 @@ public class GameFrame extends MyFrame{
 			}
 		}			
 			
+		public void checkPlayerAndEnemies() {
+			for(int i=0 ; i<GameWorld.enemies.size(); i++) {
+				Enemy e=GameWorld.enemies.get(i);
+				if(checkHit(GameWorld.player,e)) {
+					System.out.println("やられた！");
+					GameWorld.player.y=-1000;
+				}
+			}
+		}
 		
+		public void checkPlayerBulletsAndEnemies() {
+			int i=0;
+			
+			while(i<GameWorld.playerBullets.size()) {
+				PlayerBullet b=GameWorld.playerBullets.get(i);
+				
+				int j=0;
+				int hits=0;
+				
+				while(j<GameWorld.enemies.size()) {
+				Enemy e=GameWorld.enemies.get(j);
+				
+					if(checkHit(e,b)) {
+					System.out.println("あたり");
+					hits++;
+					e.life--;
+					}
+					if(e.life<=0) {
+					GameWorld.enemies.remove(j);
+					}
+					else {
+					j++;
+					}
+				}
+				if(hits>0) {
+					GameWorld.playerBullets.remove(i);
+				}else {				
+				i++;
+				}
+				
+			}
+			
+			
+		}
+		
+		public boolean checkHit(Character a,Character b) {
+			if(Math.abs(a.x-b.x)<=10 && Math.abs(a.y-b.y)<=10) {
+				return true;
+			}else {
+				return false;
+			}
+		}
 	
 	
 }
