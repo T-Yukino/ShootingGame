@@ -12,4 +12,10 @@ public class PlayerBullet extends Character{
 		f.fillRect(x+10,y,10,30);
 	}
 	
+	public void move(MyFrame f) {
+		int vx=5;
+		int vy=-5;
+		x+=vx;
+		y+=vy;
+	}
 }

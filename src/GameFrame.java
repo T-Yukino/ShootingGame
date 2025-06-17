@@ -7,6 +7,8 @@ public class GameFrame extends MyFrame{
 		GameWorld.player=new Player(100,300,0,0);
 		addKeyListener(GameWorld.player);
 		GameWorld.playerBullets=new Vector<PlayerBullet>();
+		GameWorld.enemies=new Vector<Enemy>();
+		GameWorld.enemies.add(new EnemyBase(100,50,1,0));
 		
 		while(true) {
 			
@@ -14,11 +16,27 @@ public class GameFrame extends MyFrame{
 			GameWorld.player.draw(this);
 			GameWorld.player.move();
 			movePlayerBullets();
+			
+			for(int i=0 ; i<GameWorld.enemies.size(); i++) {
+				Enemy e=GameWorld.enemies.get(i);
+				e.draw(this);
+				e.move();
+			}
+			
 			sleep(0.03);
-			int i=0;
 		}
 	}
 		
+	public void moveEnemies() {
+		
+		for(int i=0 ; i<GameWorld.enemies.size(); i++) {
+			Enemy e=GameWorld.enemies.get(i);
+			e.draw(this);
+			e.move();
+		}
+		
+	}
+	
 		public void movePlayerBullets() {
 			int i=0;
 			

@@ -47,6 +47,7 @@ public class Player extends Character implements KeyListener{
 		super.move();
 		if(x<0) x=0;
 		if(x>370) x=370;
+		
 	}
 	
 	public void draw(MyFrame f) {
