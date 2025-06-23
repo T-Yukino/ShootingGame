@@ -10,7 +10,7 @@ public class EnemyBase extends Enemy{
 	public void move() {
 		super.move();
 		if(x>300) vx=-GameWorld.stage;
-		if(x<100) vy=GameWorld.stage;
+		if(x<100) vx=GameWorld.stage;
 		
 		if(Math.random()<0.05) {
 			GameWorld.enemies.add(new StraightEnemy(x,y,0,1+GameWorld.stage));
