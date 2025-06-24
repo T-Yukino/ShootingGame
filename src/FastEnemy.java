@@ -3,6 +3,7 @@ public class FastEnemy extends Enemy{
 	public FastEnemy(double x, double y, double vx, double vy) {
 		super(x,y,vx,vy);
 		life=1;
+		score=15;
 	}
 	
 	
